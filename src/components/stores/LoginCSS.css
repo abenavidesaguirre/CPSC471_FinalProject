@@ -1,0 +1,88 @@
+.loginRoot {
+    background-color: #061947;
+    height: 89vh;
+    display: flex;
+    align-items: center;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    height:60%;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.loginForm h2 {
+    display: flex;
+    align-items: center;
+    height: 20%;
+    font-size: 3rem;
+    color: #061947;
+}
+
+.fields {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.inputField {
+    height: 30%;
+    width: 100%;
+    color: #061947;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+} 
+
+.inputField label{
+    text-align: left;
+    font-size: 1.2rem;
+    padding-right: 20px;
+}
+
+.inputField input{
+    height: 50%;
+    border-radius: 12px;
+    border: solid #061947 2px;;
+  
+}
+
+
+.submitButton {
+    height: 40%;
+    padding-top: 5%;
+    
+}
+
+.submitButton button {
+    background-color: #061947;
+    color: white;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    width: 10rem;
+}
+
+.btn {
+    transition: none !important;
+}
+
+
+
+@media screen and (max-width: 500px) {
+    .loginForm h2 {
+        font-size: 2.5rem;
+    }
+}

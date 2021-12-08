@@ -1,0 +1,124 @@
+.excursionInfoRoot{
+    padding-top: 2%;
+    text-align: center;
+    height: 10%;
+    font-size: 1.5rem;
+    color: #061947;
+}
+
+.excursionInfoRoot h2{
+    font-size: 3rem;
+}
+
+.excursionInfo {
+    display: flex;
+    align-items: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 50% 80%;
+    width:100vw;
+    height: 70vh;
+  }
+  
+  .excursionInfoDiv {
+      padding-top: 2.5%;
+      padding-bottom: 2.5%;
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.6);
+      color: black;
+  }
+  
+  .excursionInfoDivRows{
+      display: flex;
+      height: 100%;
+  }
+  
+  .excursionInfoDescription {
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 20px;
+    width: 70%;
+    border-left: solid 2px #061947;
+  }
+  
+  .excursionInfoPoints{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    justify-content:  center;
+    align-items: center;
+  }
+
+  .bookNowButton{
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+  }
+
+  .bookNowStyle{
+      background-color: #061947;
+      color: white;
+      border-radius: 12px;
+      border: none;
+      width: 10rem;
+  }
+
+  @media screen and (max-width: 1050px){
+      .excursionInfoDescription{
+        width: 80%;
+      }
+      .excursionInfoDescription p {
+          font-size: 1.1rem;
+      }
+      .excursionInfoPoints h4{
+          font-size: 1rem;
+      }
+  }
+
+  @media screen and (max-width: 850px){
+    .excursionInfo{
+        background-position: 0% 0%;
+        background-size: cover;
+    }
+    .excursionInfoDivRows{
+        flex-direction: column;
+    }
+    .excursionInfoDescription p {
+        font-weight: 600;
+    }
+    .excursionInfoDescription {
+        padding-top: 10px;
+        width: 100%;
+        border-top: solid 1px;
+        border-left:none;
+    }
+    .excursionInfoPoints h4{
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 0.9rem;
+    }
+    .excursionInfoPoints {
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 10px;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .excursionInfoRoot h2{
+        font-size: 2rem;
+    }
+    .excursionInfoPoints h4{
+        font-size: 0.7rem;
+        padding-right: 5px;
+    }
+    .excursionInfoDescription p {
+        font-size: 0.8rem;
+    }
+}

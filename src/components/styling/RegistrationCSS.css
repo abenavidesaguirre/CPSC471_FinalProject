@@ -1,0 +1,38 @@
+.registrationRoot {
+    margin: auto;
+    width: 50vw;
+}
+
+
+.registrationRoot h1{
+    padding-top: 3%;
+    padding-bottom: 3%;
+    text-align: center;
+    color: #061947;
+}
+
+.registrationRoot h2{
+    padding-top: 1%;
+    text-align: center;
+    color: #061947;
+}
+
+.buttonDiv {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.regButton{
+    background-color: #061947 !important;
+    border: none !important;
+    width: 80% !important;
+    height: 3rem !important;
+   
+}
+
+@media screen and (max-width: 500px){
+    .registrationRoot {
+        width: 80vw;
+    }
+}
