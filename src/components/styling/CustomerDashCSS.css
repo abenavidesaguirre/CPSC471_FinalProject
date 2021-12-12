@@ -1,0 +1,21 @@
+.customerDash {
+    padding-top: 5%;
+    padding-left: 2%;
+    padding-right: 5%;
+}
+
+.dashHead{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashHead button {
+    background-color: #061947;
+    color: white;
+    border-radius: 12px;
+    width: auto;
+}
+
+.next {
+    padding-top: 5%;
+}
