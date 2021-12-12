@@ -8,6 +8,7 @@ import CalendarPage from './components/CalendarPage';
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 import RegistrationPage from './components/RegistrationPage';
+import CustomerDashboard from './components/CustomerDashboard';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -133,7 +134,8 @@ const App = () => {
     <Router>
       <div className='container-fluid'>
         <Header />
-
+        <CustomerDashboard name="John"/>
+{/* 
         <Routes>
           <Route path="/" exact element={<LandingPage />} />
           <Route path="/excursions" exact element={<Excursions excursionList={excursionList} />} />
@@ -156,7 +158,9 @@ const App = () => {
           </ExcursionInfo>} />
           <Route path="/snowshoeing" exact element={<ExcursionInfo excursion={excursionList[5]}>
           </ExcursionInfo>} />
-        </Routes>
+          <Route path="/custDash" exact element={<CustomerDashboard/>}/>
+          
+        </Routes> */}
 
       </div>
     </Router>
