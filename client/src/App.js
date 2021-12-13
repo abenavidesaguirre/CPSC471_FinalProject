@@ -130,7 +130,7 @@ const App = () => {
           {/* <Route path="/bookNow" exact element={<CalendarPage times={eventTimes} />} /> */}
           {/* <Route path="/login" exact element={<LoginPage />} /> */}
           {/* <Route path="/register" exact element={<RegistrationPage />} /> */}
-          {/* <Route path="/cart/hiking" exact element={<Cart excursionList={excursionList} excursionDescriptions={excursionDescriptions[0]}excursionIndex={0} slots={hikingSlots}>
+          {/* <Route path="/cart/hiking" exact element={<Cart excursionList={excursionList} excursionDescriptions={excursionDescriptions[0]}excursionIndex={0} slots={hikingSlots}> 
 
           </Cart>} />
           <Route path="/cart/adultski" exact element={<Cart excursionList={excursionList} excursionDescriptions={excursionDescriptions[1]}excursionIndex={1} slots={aSkiingSlots}>

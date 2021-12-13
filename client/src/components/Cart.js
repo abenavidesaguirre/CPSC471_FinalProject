@@ -4,40 +4,64 @@ import CartExcursions from "./CartExcursions";
 import Button from "./Button.js";
 import {Link} from "react-router-dom"
 import "./styling/CartCSS.css"
-
-// const enableCompletion =(linkID)=>{
-//     document.getElementById(linkID).disabled = "false";
-// }
+import {useState} from 'react'
+import Axios from "axios"
 
 
 const Cart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => {
-    var total = 0;
+
+    const BookingID = Math.random().toString(5).replace(/[a-z]+/g, '').substring(0,5);
+    // const ExcursionName = excursionList[excursionIndex].Name;
+    const [Participants, setParticipants] = useState([]);
+
+    
+    const [bookingList, setBookingList] = useState([]);
+    const [total, setTotal] = useState(excursionList[excursionIndex].Cost);
+   
 
     const updateSubtotal =()=> {
-        total = document.getElementById("numPart").value * excursionList[excursionIndex].Cost;
+
+        // total = document.getElementById("numPart").value * excursionList[excursionIndex].Cost;
+        console.log(document.getElementById("numPart").value)
+        // console.log(excursionList[excursionIndex].Cost)
         console.log("Logging Total: " + total);
     };
+
+    // const submitBooking =()=> {
+    //     Axios.post("http://localhost:3001/createBooking", {
+    //         BookingID: BookingID,
+    //         ExcursionName: ExcursionName,
+    //         Participants: Participants,
+    //     }).then(() => {
+    //         setBookingList([
+    //             ...bookingList,
+    //             {
+    //                 BookingID: BookingID,
+    //                 ExcursionName: ExcursionName,
+    //                 Participants: Participants,
+    //             },
+    //         ]);
+    //     });
+    // };
 
     return (  
         <div className='cartBlock'>
             <div className='cartHeader'>
                 <h2>Cart</h2>
-                {/* <h3>{booking[bookingIndex].bookingFName} {booking[bookingIndex].bookingLName}</h3> */}
             </div>
             <div className='cartExcursionDetails'>
                     <div className='cartExcursionImg'>
-                        <img src={excursionDescriptions.imgURL}/>
+                        {/* <img src={excursionDescriptions.imgURL}/> */}
                     </div>
                     <div className='cartExcursionDetailsText'>
                     <div className='cartExcursionDetailsTitle'>
-                        {/* <h3>{excursionList[excursionIndex].title}</h3> */}
+                        {/* <h3>{excursionList[excursionIndex].Name}</h3> */}
                     </div>
                     <div className='cartExcursionDetailsDate'>
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Booking Date: </Form.Label>
                             <Form.Select type="email" placeholder="Email Address" required>
-                                 <option>Select A Date</option>
                                  {slots.map((slots => <option value={slots.TimeSlot}>{slots.Date.substr(0,10)} @ {slots.Start}:00 MST</option>
                                 ) 
                                 )}
@@ -45,8 +69,7 @@ const Cart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => 
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Number of Participants: </Form.Label>
-                            <Form.Select id="numPart"type="email" placeholder="Email Address" onChange={updateSubtotal()}  required>
-                                <option>Select Number of Participants</option>
+                            <Form.Select id="numPart" type="email" placeholder="Email Address"  required>
                                 <option value="1" >1</option>
                                 <option value="2" >2</option>
                                 <option value="3" >3</option>
@@ -61,11 +84,11 @@ const Cart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => 
                         </Form.Group>
                     </Form>
 
-                        <h4>Cost: $Hardcode.00</h4>
+                        {/* <h4>Cost Per Person: ${excursionList[excursionIndex].Cost}.00</h4> */}
                     </div>
                     </div>
                 </div>
-                
+                 
             <div className='cartFooter'>
             <form>
                 <label>
@@ -73,9 +96,8 @@ const Cart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => 
 
                     <input size="40" type="text" name="name" placeholder="Signature" required />
                 </label>
-                <Link id="bookingConfButton" to="/bookingConf" disabled>
-                    <Button type="submit" text="Complete Order" buttonType="completeButton" buttonStyle="completeStyle" disabled></Button>
-                </Link>
+                    <Button type="submit" text="Complete Order" buttonType="completeButton" buttonStyle="completeStyle" ></Button>
+    
             </form>
             <div>
                 <h4>Subtotal: ${total}.00</h4>
@@ -88,7 +110,7 @@ const Cart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => 
   
   export default Cart
 
-  
+//   onClick={submitBooking()}
 
 
 

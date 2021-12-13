@@ -9,10 +9,10 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  user: 'srnkidycfzmrvk',
-  host: 'ec2-3-230-219-251.compute-1.amazonaws.com',
-  password: 'fe6d632bc3ee59da65cad454da06c31a415ada8a26ecd843bb6f28d46a2577d5',
-  database: "dbpae9quth4h5p",
+  user: 'root',
+  host: 'localhost',
+  password: 'password',
+  database: "excursion_company",
 });
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -102,8 +102,24 @@ app.get("/snowshoeingSlots", (req, res)=>{
     );
 });
 
+app.post("/createBooking", (req, res) => {
+    const BookingID = req.body.BookingID;
+    const ExcursionName = req.body.ExcursionName;
+    const Participants = req.body.Participants;
+
+    db.query(
+        "INSERT INTO booking (BookingID, ExcursionName, Participants) VALUES (?,?,?)",
+        (err,result) => {
+            if(err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
 
 
-app.listen(5432, () => {
+app.listen(3001, () => {
     console.log("server running on port 3001");
 });
