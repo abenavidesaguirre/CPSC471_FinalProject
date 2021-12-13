@@ -8,7 +8,7 @@ import {useState} from 'react'
 import Axios from "axios"
 
 
-const Cart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => {
+const TestCart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => {
 
     // const [TimeSlot, setTimeSlot] = useState(slots[0].TimeSlot)
     // const [Participants, setNumParticipants] = useState(0);
@@ -58,7 +58,6 @@ const Cart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => 
         console.log("Participants:" + Participants);
         console.log("Agreement Signature:" + AgreementSignature);
 
-        if(Participants !== 0){
         Axios.post("http://localhost:3001/createBooking", {
             
             BookingID: BookingID,
@@ -111,7 +110,7 @@ const Cart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => 
                 },
             ]);
         });
-    }
+    
     };
 
     return (  
@@ -180,13 +179,7 @@ const Cart = ({excursionList, excursionDescriptions, excursionIndex, slots}) => 
     );
   }
   
-  export default Cart
+  export default TestCart
 
-//   (event)=>{setNumParticipants(event.target.value)}
 
-// onChange={(event) => {setTotal(event.target.value * excursionList[excursionIndex].Cost)}}
-
-// onChange={(event) => {setTimeSlot(event.target.value)}}
-
-// onChange={(event) => {setAgreementSignature(event.target.value)}}
 

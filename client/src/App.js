@@ -2,19 +2,28 @@ import Header from './components/Header';
 import Excursions from './components/Excursions';
 import ExcursionInfo from './components/ExcursionInfo';
 import Cart from './components/Cart';
+import Form from 'react-bootstrap/Form'
 
-import { useState, useEffect } from 'react';
+
+import Button from "./components/Button.js";
+import {Link} from "react-router-dom"
+import "./components/styling/CartCSS.css"
+import {useState} from 'react'
+import Axios from "axios"
+
+import {useEffect } from 'react';
 import CalendarPage from './components/CalendarPage';
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 import RegistrationPage from './components/RegistrationPage';
 import CustomerDashboard from './components/CustomerDashboard';
-import Axios from "axios";
+
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 const App = () => {
+
   const [excursionDescriptions] = useState([
     {   imgURL: 'https://i.imgur.com/LmF0aVw.jpg',
         snip: 'Take a journey through the Canadian wilderness with our expert tour guides. You never know what you might see in your own backyard!',
@@ -107,15 +116,139 @@ const App = () => {
   }, []);
 
 
-  // const [eventTimes] = useState([
-  //   { title: '2 Hour Guided Hike', start: '2022-01-16T8:00:00', end: '2022-01-16T10:00:00' },
-  //   { title: 'Ice Skating', start: '2022-01-03T13:00:00', end: '2022-01-03T16:00:00' },
-  //   { title: 'Adult Ski Lessons', start: '2022-01-07T8:00:00', end: '2022-01-07T16:00:00' },
-  //   { title: 'Kids Ski Lessons', start: '2022-01-12T10:00:00', end: '2022-01-12T14:00:00' }
-  // ])
 
 
- 
+  const BookingID = "TestID12"
+  const NumAdults = 3;                //change in DB?
+  const NumMinors = 0;
+  const Cost = 35;
+  const TimeSlot = "HIKE1"
+  const ExcursionName = "2 Hour Guided Hike";
+  const Participants = 3;
+  const Receipt = "I will pay onsite"
+  const AgreementSignature = "John Smith"
+  const CustomerID = 2;                       //get after login
+
+
+  const [bookingList, setBookingList] = useState([]);
+  const [booksList, setBooksList] = useState([]);
+  const [makesList, setMakesList] = useState([]);
+
+  Axios.post("http://localhost:3001/createBooking", {
+            
+            BookingID: BookingID,
+            NumAdults : NumAdults,
+            NumMinors : NumMinors,
+            Cost : Cost,
+            TimeSlot : TimeSlot,
+
+        }).then(() => {
+            setBookingList([
+                ...bookingList,
+                {
+                    BookingID: BookingID,
+                    NumAdults : NumAdults,
+                    NumMinors : NumMinors,
+                    Cost : Cost,
+                    TimeSlot : TimeSlot,
+                },
+            ]);
+        });
+
+        Axios.post("http://localhost:3001/Books", {
+            BookingID: BookingID,
+            ExcursionName: ExcursionName,
+            Participants: Participants,
+        }).then(() => {
+            setBooksList([
+                ...booksList,
+                {
+                    BookingID: BookingID,
+                    ExcursionName: ExcursionName,
+                    Participants: Participants,
+                },
+            ]);
+        });
+
+        Axios.post("http://localhost:3001/MakesBooking", {
+            CustomerID: CustomerID,
+            BookingID: BookingID,
+            Receipt: Receipt,
+            AgreementSignature: AgreementSignature
+        }).then(() => {
+            setMakesList([
+                ...makesList,
+                {
+                    CustomerID: CustomerID,
+                    BookingID: BookingID,
+                    Receipt: Receipt,
+                    AgreementSignature: AgreementSignature
+                },
+            ]);
+        });
+
+        const submitBooking =()=> {
+          console.log("Time Slot:" + TimeSlot);
+          console.log("BookingID:" + BookingID);
+          console.log("Cost:" + Cost);
+          console.log("Participants:" + Participants);
+          console.log("Agreement Signature:" + AgreementSignature);
+  
+          if(Participants !== 0){
+          Axios.post("http://localhost:3001/createBooking", {
+              
+              BookingID: BookingID,
+              NumAdults : NumAdults,
+              NumMinors : NumMinors,
+              Cost : Cost,
+              TimeSlot : TimeSlot,
+  
+          }).then(() => {
+              setBookingList([
+                  ...bookingList,
+                  {
+                      BookingID: BookingID,
+                      NumAdults : NumAdults,
+                      NumMinors : NumMinors,
+                      Cost : Cost,
+                      TimeSlot : TimeSlot,
+                  },
+              ]);
+          });
+  
+          // Axios.post("http://localhost:3001/Books", {
+          //     BookingID: BookingID,
+          //     ExcursionName: ExcursionName,
+          //     Participants: Participants,
+          // }).then(() => {
+          //     setBooksList([
+          //         ...booksList,
+          //         {
+          //             BookingID: BookingID,
+          //             ExcursionName: ExcursionName,
+          //             Participants: Participants,
+          //         },
+          //     ]);
+          // });
+  
+          // Axios.post("http://localhost:3001/MakesBooking", {
+          //     CustomerID: CustomerID,
+          //     BookingID: BookingID,
+          //     Receipt: Receipt,
+          //     AgreementSignature: AgreementSignature
+          // }).then(() => {
+          //     setMakesList([
+          //         ...makesList,
+          //         {
+          //             CustomerID: CustomerID,
+          //             BookingID: BookingID,
+          //             Receipt: Receipt,
+          //             AgreementSignature: AgreementSignature
+          //         },
+          //     ]);
+          // });
+      }
+      };
 
   return (
     <Router>
@@ -163,6 +296,69 @@ const App = () => {
           {/* <Route path="/custDash" exact element={<CustomerDashboard/>}/> */}
           
         </Routes>
+
+        {/* TESTING CART */}
+        <div className='cartBlock'>
+            <div className='cartHeader'>
+                <h2>Cart</h2>
+            </div>
+            <div className='cartExcursionDetails'>
+                    <div className='cartExcursionImg'>
+                        <img src="https://i.imgur.com/LmF0aVw.jpg"/>
+                    </div>
+                    <div className='cartExcursionDetailsText'>
+                    <div className='cartExcursionDetailsTitle'>
+                        <h3>2 Hour Guided Hike</h3>
+                    </div>
+                    <div className='cartExcursionDetailsDate'>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Booking Date: </Form.Label>
+                            <Form.Select type="email" placeholder="Email Address"  required>
+                                <option> 2022-01-03 @ 10:00 </option>
+                                 
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Number of Participants: </Form.Label>
+                            <Form.Select id="numPart" type="email" placeholder="Email Address" required>
+                                <option value="1" >1</option>
+                                <option value="2" >2</option>
+                                <option value="3" >3</option>
+                                <option value="4" >4</option>
+                                <option value="5" >5</option>
+                                <option value="6" >6</option>
+                                <option value="7" >7</option>
+                                <option value="8" >8</option>
+                                <option value="9" >9</option>
+                                <option value="10" >10</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </Form>
+
+                        <h4>Cost Per Person: ${Cost}.00</h4>
+                    </div>
+                    </div>
+                </div>
+                 
+            <div className='cartFooter'>
+            <form>
+                <label>
+                    I understand the risk associated with the above activities. <br/><br/>I understand the terms and conditions of service: <br/><br/>
+
+                    <input size="40" type="text" name="name" placeholder="Signature" required />
+                </label>
+                    <Button text="Complete Order" buttonType="completeButton" buttonStyle="completeStyle"  onClick={submitBooking()}></Button>
+                    <Link to="/bookingConf">
+                    <Button text="Finalize" buttonType="completeButton" buttonStyle="completeStyle"  onClick={submitBooking()}></Button>
+                    </Link>
+            </form>
+            <div>
+                <h4>Subtotal: ${Cost}.00</h4>
+       
+            </div>
+            </div>
+        </div>
 
       </div>
     </Router>
