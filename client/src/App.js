@@ -2,7 +2,7 @@ import Header from './components/Header';
 import Excursions from './components/Excursions';
 import ExcursionInfo from './components/ExcursionInfo';
 import Cart from './components/Cart';
-import BookingConf from './components/BookingConf';
+
 import { useState, useEffect } from 'react';
 import CalendarPage from './components/CalendarPage';
 import LandingPage from './components/LandingPage';
@@ -130,7 +130,7 @@ const App = () => {
           {/* <Route path="/bookNow" exact element={<CalendarPage times={eventTimes} />} /> */}
           {/* <Route path="/login" exact element={<LoginPage />} /> */}
           {/* <Route path="/register" exact element={<RegistrationPage />} /> */}
-          {/* <Route path="/cart/hiking" exact element={<Cart excursionList={excursionList} excursionDescriptions={excursionDescriptions[0]}excursionIndex={0} slots={hikingSlots}> 
+          <Route path="/cart/hiking" exact element={<Cart excursionList={excursionList} excursionDescriptions={excursionDescriptions[0]}excursionIndex={0} slots={hikingSlots}> 
 
           </Cart>} />
           <Route path="/cart/adultski" exact element={<Cart excursionList={excursionList} excursionDescriptions={excursionDescriptions[1]}excursionIndex={1} slots={aSkiingSlots}>
@@ -147,9 +147,7 @@ const App = () => {
           </Cart>} />
           <Route path="/cart/snowshoeing" exact element={<Cart excursionList={excursionList} excursionDescriptions={excursionDescriptions[5]}excursionIndex={5} slots={snowshoeingSlots}>
             
-          </Cart>} /> */}
-          {/* <Route path="/bookingConf" exact element={<BookingConf booking={bookingList} excursionList={excursionList}
-            bookingIndex={0} excursionIndex={0}></BookingConf>} /> */}
+          </Cart>} />
           <Route path="/hiking" exact element={<ExcursionInfo excursion={excursionList} excursionDetails={excursionDescriptions[0]} excursionIndex={0}>
           </ExcursionInfo>} />
           <Route path="/adultSki" exact element={<ExcursionInfo excursion={excursionList} excursionDetails={excursionDescriptions[1]} excursionIndex={1}>

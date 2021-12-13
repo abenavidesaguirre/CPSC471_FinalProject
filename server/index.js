@@ -30,6 +30,45 @@ app.get("/excursions", (req, res) => {
     );
 });
 
+app.get("/bookings", (req, res) => {
+
+    db.query(
+        "SELECT * FROM Booking",
+        (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+            res.send(result);
+        }
+    );
+});
+
+app.get("/books", (req, res) => {
+
+    db.query(
+        "SELECT * FROM Books",
+        (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+            res.send(result);
+        }
+    );
+});
+
+app.get("/makes", (req, res) => {
+
+    db.query(
+        "SELECT * FROM Makes_a",
+        (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+            res.send(result);
+        }
+    );
+});
+
 app.get("/hikingSlots", (req, res)=>{
     db.query(
         "SELECT * FROM offers, schedule WHERE offers.ExcursionName = '2 Hour Guided Hike' AND offers.TimeSlot = schedule.TimeSlotID; ",
@@ -103,12 +142,15 @@ app.get("/snowshoeingSlots", (req, res)=>{
 });
 
 app.post("/createBooking", (req, res) => {
-    const BookingID = req.body.BookingID;
-    const ExcursionName = req.body.ExcursionName;
-    const Participants = req.body.Participants;
+    const BookingID = req.body.BookingID
+    const NumAdults = req.body.NumAdults
+    const NumMinors = req.body.NumMinors
+    const Cost = req.body.Cost
+    const TimeSlot = req.body.TimeSlot
 
     db.query(
-        "INSERT INTO booking (BookingID, ExcursionName, Participants) VALUES (?,?,?)",
+        "INSERT INTO booking (BookingID, NumAdults, NumMinors, Cost, TimeSlot) VALUES (?,?,?,?,?)",
+        [BookingID, NumAdults, NumMinors, Cost, TimeSlot],
         (err,result) => {
             if(err) {
                 console.log(err);
@@ -119,6 +161,42 @@ app.post("/createBooking", (req, res) => {
     );
 });
 
+app.post("/Books", (req, res) => {
+    const BookingID = req.body.BookingID
+    const ExcursionName = req.body.ExcursionName
+    const Participants = req.body.Participants
+
+    db.query(
+        "INSERT INTO books (BookingID, ExcursionName, Participants) VALUES (?,?,?)",
+        [BookingID, ExcursionName, Participants],
+        (err,result) => {
+            if(err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
+
+app.post("/MakesBooking", (req, res) => {
+    const CustomerID = req.body.CustomerID
+    const BookingID = req.body.BookingID
+    const Receipt = req.body.Receipt
+    const AgreementSignature = req.body.AgreementSignature
+
+    db.query(
+        "INSERT INTO makes_a (CustomerID, BookingID, Receipt, AgreementSignature) VALUES (?,?,?,?)",
+        [CustomerID, BookingID, Receipt, AgreementSignature],
+        (err,result) => {
+            if(err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
 
 app.listen(3001, () => {
     console.log("server running on port 3001");
