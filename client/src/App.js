@@ -24,6 +24,12 @@ import './App.css';
 
 const App = () => {
 
+  const [eventTimes] = useState([
+    { title: '2 Hour Guided Hike', start: '2022-01-16T8:00:00', end: '2022-01-16T10:00:00' },
+    { title: 'Ice Skating', start: '2022-01-03T13:00:00', end: '2022-01-03T16:00:00' },
+    { title: 'Adult Ski Lessons', start: '2022-01-07T8:00:00', end: '2022-01-07T16:00:00' },
+    { title: 'Kids Ski Lessons', start: '2022-01-12T10:00:00', end: '2022-01-12T14:00:00' }
+  ])
   const [excursionDescriptions] = useState([
     {   imgURL: 'https://i.imgur.com/LmF0aVw.jpg',
         snip: 'Take a journey through the Canadian wilderness with our expert tour guides. You never know what you might see in your own backyard!',
@@ -195,6 +201,22 @@ const App = () => {
           console.log("Agreement Signature:" + AgreementSignature);
   
           if(Participants !== 0){
+
+            Axios.post("http://localhost:3001/Books", {
+              BookingID: BookingID,
+              ExcursionName: ExcursionName,
+              Participants: Participants,
+          }).then(() => {
+              setBooksList([
+                  ...booksList,
+                  {
+                      BookingID: BookingID,
+                      ExcursionName: ExcursionName,
+                      Participants: Participants,
+                  },a
+              ]);
+          });
+
           Axios.post("http://localhost:3001/createBooking", {
               
               BookingID: BookingID,
@@ -216,37 +238,23 @@ const App = () => {
               ]);
           });
   
-          // Axios.post("http://localhost:3001/Books", {
-          //     BookingID: BookingID,
-          //     ExcursionName: ExcursionName,
-          //     Participants: Participants,
-          // }).then(() => {
-          //     setBooksList([
-          //         ...booksList,
-          //         {
-          //             BookingID: BookingID,
-          //             ExcursionName: ExcursionName,
-          //             Participants: Participants,
-          //         },
-          //     ]);
-          // });
-  
-          // Axios.post("http://localhost:3001/MakesBooking", {
-          //     CustomerID: CustomerID,
-          //     BookingID: BookingID,
-          //     Receipt: Receipt,
-          //     AgreementSignature: AgreementSignature
-          // }).then(() => {
-          //     setMakesList([
-          //         ...makesList,
-          //         {
-          //             CustomerID: CustomerID,
-          //             BookingID: BookingID,
-          //             Receipt: Receipt,
-          //             AgreementSignature: AgreementSignature
-          //         },
-          //     ]);
-          // });
+         
+          Axios.post("http://localhost:3001/MakesBooking", {
+              CustomerID: CustomerID,
+              BookingID: BookingID,
+              Receipt: Receipt,
+              AgreementSignature: AgreementSignature
+          }).then(() => {
+              setMakesList([
+                  ...makesList,
+                  {
+                      CustomerID: CustomerID,
+                      BookingID: BookingID,
+                      Receipt: Receipt,
+                      AgreementSignature: AgreementSignature
+                  },
+              ]);
+          });
       }
       };
 
@@ -260,9 +268,9 @@ const App = () => {
         <Routes>
           <Route path="/" exact element={<LandingPage />} />
           <Route path="/excursions" exact element={<Excursions excursionList={excursionList} excursionDescriptions = {excursionDescriptions} />} />
-          {/* <Route path="/bookNow" exact element={<CalendarPage times={eventTimes} />} /> */}
-          {/* <Route path="/login" exact element={<LoginPage />} /> */}
-          {/* <Route path="/register" exact element={<RegistrationPage />} /> */}
+          <Route path="/bookNow" exact element={<CalendarPage times={eventTimes} />} />
+          <Route path="/login" exact element={<LoginPage />} />
+          <Route path="/register" exact element={<RegistrationPage />} />
           <Route path="/cart/hiking" exact element={<Cart excursionList={excursionList} excursionDescriptions={excursionDescriptions[0]}excursionIndex={0} slots={hikingSlots}> 
 
           </Cart>} />
@@ -298,7 +306,7 @@ const App = () => {
         </Routes>
 
         {/* TESTING CART */}
-        <div className='cartBlock'>
+        {/* <div className='cartBlock'>
             <div className='cartHeader'>
                 <h2>Cart</h2>
             </div>
@@ -358,7 +366,8 @@ const App = () => {
        
             </div>
             </div>
-        </div>
+        </div> */}
+        {/* END OF TESTING */}
 
       </div>
     </Router>
