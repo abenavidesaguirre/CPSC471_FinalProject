@@ -24,7 +24,7 @@ const Excursions = ({excursionList, excursionDescriptions}) => {
                             </div>
                             <div className='excursionDetails'>
                                 <h4>Cost: ${val.Cost}</h4>
-                                <h4>Duration: {val.Duration}</h4>
+                                <h4>Duration: {val.Duration} Hours</h4>
                             </div>
                             <div className='excursionDescription'>
                                 <p>{excursionDescriptions[key].snip}</p>
