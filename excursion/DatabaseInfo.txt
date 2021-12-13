@@ -1,0 +1,137 @@
+CREATE DATABASE excursion_company;
+
+CREATE TABLE Account(
+	Username VARCHAR(50) NOT NULL, 
+	Password VARCHAR(50) NOT NULL,
+	Email VARCHAR(50) NOT NULL,
+	AccessLevel VARCHAR(50),
+	CustomerID int,
+	StaffID int,
+	PRIMARY KEY(Username),
+	FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(StaffID) REFERENCES Staff(StaffID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Booking(
+	BookingID VARCHAR(10) NOT NULL,
+	NumAdults int NOT NULL,
+	NumMinors int NOT NULL,
+	Cost int NOT NULL,
+	TimeSlot VARCHAR(10) NOT NULL,
+	PRIMARY KEY(BookingID),
+	FOREIGN KEY(TimeSlot) REFERENCES Schedule(TimeSlotID)
+);
+
+CREATE TABLE Books(
+	BookingID VARCHAR(10) NOT NULL,
+	ExcursionName VARCHAR(50) NOT NULL,
+	Participants int,
+	FOREIGN KEY(BookingID) REFERENCES Booking(BookingID),
+	FOREIGN KEY(ExcursionName) REFERENCES Excursion(Name) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Coordinator(
+	StaffID int NOT NULL,
+	Shift VARCHAR(10) NOT NULL,
+	FOREIGN KEY(StaffID) REFERENCES Staff(StaffID),
+	FOREIGN KEY(Shift) REFERENCES Schedule(TimeSlotID)
+);
+
+CREATE TABLE Customer(
+	CustomerID int NOT NULL AUTO INCREMENT,
+	FirstName VARCHAR(20) NOT NULL,
+	LastName VARCHAR(20) NOT NULL,
+	Address VARCHAR(300) NOT NULL,
+	City VARCHAR(20) NOT NULL,
+	Country VARCHAR(20) NOT NULL,
+	PostalCode VARCHAR(8) NOT NULL,
+	PhoneNumber VARCHAR(30) NOT NULL,
+	DOB date NOT NULL,
+	HotelID int,
+	AccountUsername VARCHAR(50),
+	EContact VARCHAR(100),
+	PRIMARY KEY(CustomerID),
+	FOREIGN KEY(HotelID) REFERENCES Hotel(PartnerID),
+	FOREIGN KEY(AccountUsername) REFERENCES Account(Username) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(EContact) REFERENCES Emergency_Contact(Name)
+);
+
+CREATE TABLE Emergency_Contact(
+	Name VARCHAR(100) NOT NULL,
+	PhoneNumber VARCHAR(30) NOT NULL,
+	Relationship VARCHAR(30),
+	CustomerID int NOT NULL,
+	PRIMARY KEY(Name),
+	FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID),
+);
+
+CREATE TABLE Excursion(
+	Name VARCHAR(50) NOT NULL,
+	Duration int NOT NULL,
+	Cost int NOT NULL,
+	Months VARCHAR(300),
+	MaxParticipants int,
+	CoordinatorID int NOT NULL,
+	PRIMARY KEY(Name),
+	FOREIGN KEY(CoordinatorID) REFERENCES Coordinator(StaffID)
+);
+
+CREATE TABLE Hotel(
+	PartnerID int NOT NULL,
+	Name VARCHAR(300) NOT NULL,
+	PhoneNumber VARCHAR(20) NOT NULL,
+	Address VARCHAR(300) NOT NULL,
+	City VARCHAR(50) NOT NULL,
+	PostalCode VARCHAR(8),
+	PRIMARY KEY(PartnerID)
+);
+
+CREATE TABLE Makes_a(
+	CustomerID int NOT NULL,
+	BookingID VARCHAR(10) NOT NULL,
+	Receipt VARCHAR(500),
+	AgreementSignature VARCHAR(500) NOT NULL,
+	FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID),
+	FOREIGN KEY(BookingID) REFERENCES Booking(BookingID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Offers(
+	ExcursionName VARCHAR(50) NOT NULL,
+	TimeSlot VARCHAR(10) NOT NULL,
+	FOREIGN KEY(ExcursionName) REFERENCES Excursion(Name),
+	FOREIGN KEY(TimeSlot) REFERENCES Schedule(TimeSlotID)
+);
+
+CREATE TABLE Schedule(
+	TimeSlotID VARCHAR(10) NOT NULL,
+	Start int NOT NULL,
+	End int NOT NULL,
+	Date date NOT NULL,
+	PRIMARY KEY(TimeSlotID)
+);
+
+CREATE TABLE Staff(
+	StaffID int NOT NULL,
+	SIN VARCHAR(20) NOT NULL UNIQUE,
+	FirstName VARCHAR(30) NOT NULL,
+	LastName VARCHAR(30) NOT NULL,
+	Address VARCHAR(300) NOT NULL,
+	City VARCHAR(50) NOT NULL,
+	PostalCode VARCHAR(10) NOT NULL,
+	PhoneNumber VARCHAR(20) NOT NULL,
+	DOB date NOT NULL,
+	Mgr_SIN VARCHAR(20),
+	AccountUsername VARCHAR(50) NOT NULL,
+	PRIMARY KEY(StaffID),
+	FOREIGN KEY(Mgr_SIN) REFERENCES Staff(SIN),
+	FOREIGN KEY(AccountUsername) REFERENCES Account(Username) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Tour_Guide(
+	StaffID int NOT NULL,
+	Shift VARCHAR(10),
+	FOREIGN KEY(StaffID) REFERENCES Staff(StaffID),
+	FOREIGN KEY(Shift) REFERENCES Schedule(TimeSlotID)
+);
+	
+
