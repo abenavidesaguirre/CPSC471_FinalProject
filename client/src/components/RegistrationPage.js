@@ -10,16 +10,16 @@ const RegistrationPage = ({  }) => {
   const [passwordReg, setPasswordReg] = useState('');
   const [emailReg, setEmailReg] = useState('');
 
-  const registerAccount = () => {
-    Axios.post("http://localhost:3001/account", {
-      username: usernameReg,
-      password: passwordReg,
-      email: emailReg
-      //accessLevel = customer
-    }).then((response) => {
-      console.log(response);
-    });
-  };
+  // const registerAccount = () => {
+  //   Axios.post("http://localhost:3001/account", {
+  //     username: usernameReg,
+  //     password: passwordReg,
+  //     email: emailReg
+  //     //accessLevel = customer
+  //   }).then((response) => {
+  //     console.log(response);
+  //   });
+  // };
 
   //temporary customer
   const [fName, setFName] = useState('');
@@ -33,83 +33,83 @@ const RegistrationPage = ({  }) => {
   const [hotelID, setHotelID] = useState('');
 
 
-  const tempRegisterCustomer = () => {
-    Axios.post("http://localhost:3001/tempcustomer", {
-      fName: fName,
-      lName: lName,
-      address: address,
-      city: city,
-      country: country,
-      postalCode: postalCode,
-      phone: phone,
-      dob: dob,
-      //ename is initially null
-      hotelID: hotelID,
-      username: usernameReg
-    }).then((response) => {
-      console.log(response);
-    });
-  };
-
-  //get CustomerID
-
-  const [customerID, setCustomerID] = useState([]);
-
-  useEffect(() => {
-    Axios.get('http://localhost:3001/getid').then((response) => {
-          setCustomerID(response.data);
-          console.log(response.data);
-    });
-  }, []);  
-
-  let id = 0;
-  for (let i = 0; i < customerID.length; i++) {
-    let temp = customerID[i];
-    if (temp > id) {
-      id = temp;
-    }
-  }
-
-  //Emergency Contact
-
-  const [eName, setEName] = useState('');
-  const [ePhone, setEPhone] = useState('');
-  const [eRelationship, setERelationship] = useState('');
-  const [cID, setCID] = useState(0);
-  setCID(id);
-
-  const registerEContact = () => {
-    Axios.post("http://localhost:3001/econtact", {
-      //customerID - use COUNT * to get thisss
-      eName: eName,
-      ePhone: ePhone,
-      eRelationship: eRelationship,
-      cID: cID
-    }).then((response) => {
-      console.log(response);
-    });
-  };
-
-  //finalize customer
-  // const finalizeCustomer = () => {
-  //   Axios.post("http://localhost:3001/customer", {
-  //     customerID: customerID,
-  //     eName: eName
+  // const tempRegisterCustomer = () => {
+  //   Axios.post("http://localhost:3001/tempcustomer", {
+  //     fName: fName,
+  //     lName: lName,
+  //     address: address,
+  //     city: city,
+  //     country: country,
+  //     postalCode: postalCode,
+  //     phone: phone,
+  //     dob: dob,
+  //     //ename is initially null
+  //     hotelID: hotelID,
+  //     username: usernameReg
   //   }).then((response) => {
   //     console.log(response);
   //   });
   // };
 
-  //Hotel ID's fetching
-  const [hID, setHID] = useState([]);
+  // //get CustomerID
+
+  // const [customerID, setCustomerID] = useState([]);
+
+  // useEffect(() => {
+  //   Axios.get('http://localhost:3001/getid').then((response) => {
+  //         setCustomerID(response.data);
+  //         console.log(response.data);
+  //   });
+  // }, []);  
+
+  // let id = 0;
+  // for (let i = 0; i < customerID.length; i++) {
+  //   let temp = customerID[i];
+  //   if (temp > id) {
+  //     id = temp;
+  //   }
+  // }
+
+  // //Emergency Contact
+
+  const [eName, setEName] = useState('');
+  const [ePhone, setEPhone] = useState('');
+  const [eRelationship, setERelationship] = useState('');
+  const [cID, setCID] = useState(0);
+  // setCID(id);
+
+  // const registerEContact = () => {
+  //   Axios.post("http://localhost:3001/econtact", {
+  //     //customerID - use COUNT * to get thisss
+  //     eName: eName,
+  //     ePhone: ePhone,
+  //     eRelationship: eRelationship,
+  //     cID: cID
+  //   }).then((response) => {
+  //     console.log(response);
+  //   });
+  // };
+
+  // //finalize customer
+  // // const finalizeCustomer = () => {
+  // //   Axios.post("http://localhost:3001/customer", {
+  // //     customerID: customerID,
+  // //     eName: eName
+  // //   }).then((response) => {
+  // //     console.log(response);
+  // //   });
+  // // };
+
+  // //Hotel ID's fetching
+ // const [hID, setHID] = useState([]); 
 
 
-  useEffect(() => {
-    Axios.get('http://localhost:3001/gethotelid').then((response) => {
-          setHID(response.data);
-          console.log(response.data);
-    });
-  }, []); 
+  // useEffect(() => {
+  //   Axios.get('http://localhost:3001/gethotelid').then((response) => {
+  //         setHID(response.data);
+  //         console.log(response.data);
+  //   });
+  // }, []); 
 
 
   
@@ -233,21 +233,22 @@ const RegistrationPage = ({  }) => {
     }}/>
   </Form.Group>
 
+{/* 
+  {hID.map((val, key) => {
+    return (val);
+  })} */}
 
-  {hID.map((val) => {
-    return ( <h1>Hotel ID: {val.hID}</h1> );
-  })}
 
   <h2>Hotel Information (Optional)</h2>
 
   <Form.Group className="mb-3" controlId="formBasicHotelID">
     <Form.Label>Hotel ID</Form.Label>
     <Form.Select type="hotelID">
-      <option>Select</option>
-      {/* currently hardcoded --> CHANGE */}
-      <option value="1">Best Western</option> 
-      <option value="2">Holidy Inn</option>
-      <option value="3">Hilton Garden Inn</option>
+      {/* <option
+      onChange={(e) => {
+        setHotelID(e.target.value);
+      }}>Select</option>
+       {hID.map((hID => <option value={hID.PartnerID}></option>))} */}
     </Form.Select>
   </Form.Group>
 

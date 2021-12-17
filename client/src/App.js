@@ -15,95 +15,24 @@ import Axios from "axios";
 
 
 const App = () => {
-  //for registration
-  // const [usernameReg, setUsernameReg] = useState('');
-  // const [passwordReg, setPasswordReg] = useState('');
-  // const [emailReg, setEmailReg] = useState('');
-  // const [fName, setFName] = useState('');
-  // const [lName, setLName] = useState('');
-  // const [address, setAddress] = useState('');
-  // const [city, setCity] = useState('');
-  // const [country, setCountry] = useState('');
-  // const [postalCode, setPostalCode] = useState('');
-  // const [phone, setPhone] = useState('');
-  // const [dob, setDOB] = useState('');
-  // const [eName, setEName] = useState('');
-  // const [ePhone, setEPhone] = useState('');
-  // const [eRelationship, setERelationship] = useState('');
-  // const [hotelID, setHotelID] = useState(0);//null?
-  // var customerID = {customerID};//somehow have to ++ this, does this even return an int?
-  
-  // const registerAccount = () => {
-  //   Axios.post("http://localhost:3001/account", {
-  //     username: usernameReg,
-  //     password: passwordReg,
-  //     email: emailReg
-  //     //accessLevel = customer
-  //   }).then((response) => {
-  //     console.log(response);
-  //   });
-  // };
+  const [eventTimes, setEventTimes] = useState([]);
 
-  // const getID = () => {
-  //   Axios.get("http://localhost:3001/getid", {
-  //     //customerID - use COUNT * to get thisss
-  //     customerID: customerID
-  //   }).then((response) => {
-  //     console.log(response);
-  //   });
-  // };
+  useEffect(()=>{
+    Axios.get('http://localhost:3001/schedule').then((response) => {
+      setEventTimes(response.data);
+    });
+  }, []);
 
-  // const tempRegisterCustomer = () => {
-  //   Axios.post("http://localhost:3001/tempcustomer", {
-  //     //customerID - use COUNT * to get thisss
-  //     fName: fName,
-  //     lName: lName,
-  //     address: address,
-  //     city: city,
-  //     country: country,
-  //     postalCode: postalCode,
-  //     phone: phone,
-  //     dob: dob,
-  //     //ename is initially null
-  //     hotelID: hotelID,
-  //     username: usernameReg
-  //   }).then((response) => {
-  //     console.log(response);
-  //   });
-  // };
-
-  // const registerEContact = () => {
-  //   Axios.post("http://localhost:3001/econtact", {
-  //     //customerID - use COUNT * to get thisss
-  //     eName: eName,
-  //     ePhone: ePhone,
-  //     eRelationship: eRelationship,
-  //     //customerID: customerID
-  //   }).then((response) => {
-  //     console.log(response);
-  //   });
-  // };
-
-  // const finalizeCustomer = () => {
-  //   Axios.post("http://localhost:3001/customer", {
-  //     customerID: customerID,
-  //     eName: eName
-  //   }).then((response) => {
-  //     console.log(response);
-  //   });
-  // };
+  console.log(eventTimes);
 
 
 
-
-
-
-  const [eventTimes] = useState([
-    { title: '2 Hour Guided Hike', start: '2022-01-16T8:00:00', end: '2022-01-16T10:00:00' },
-    { title: 'Ice Skating', start: '2022-01-03T13:00:00', end: '2022-01-03T16:00:00' },
-    { title: 'Adult Ski Lessons', start: '2022-01-07T8:00:00', end: '2022-01-07T16:00:00' },
-    { title: 'Kids Ski Lessons', start: '2022-01-12T10:00:00', end: '2022-01-12T14:00:00' }
-  ])
+  // const [eventTimes] = useState([
+  //   { title: '2 Hour Guided Hike', start: '2022-01-16T8:00:00', end: '2022-01-16T10:00:00' },
+  //   { title: 'Ice Skating', start: '2022-01-03T13:00:00', end: '2022-01-03T16:00:00' },
+  //   { title: 'Adult Ski Lessons', start: '2022-01-07T8:00:00', end: '2022-01-07T16:00:00' },
+  //   { title: 'Kids Ski Lessons', start: '2022-01-12T10:00:00', end: '2022-01-12T14:00:00' }
+  // ])
 
 
   const [excursionList] = useState([
@@ -221,7 +150,7 @@ const App = () => {
         <Routes>
           <Route path="/" exact element={<LandingPage />} />
           <Route path="/excursions" exact element={<Excursions excursionList={excursionList} />} />
-          <Route path="/bookNow" exact element={<CalendarPage times={eventTimes} />} />
+          <Route path="/calendar" exact element={<CalendarPage times={eventTimes} />} />
           <Route path="/login" exact element={<LoginPage />} />
           <Route path="/register" exact element={<RegistrationPage />} />
           <Route path="/cart" exact element={<Cart booking={bookingList} excursionList={excursionList} bookingIndex={0}

@@ -6,7 +6,7 @@ import React from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Axios from "axios";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "./styling/RegistrationCSS.css"
 
 // class LoginPage extends React.Component{
@@ -101,7 +101,7 @@ import "./styling/RegistrationCSS.css"
       
 // export default LoginForm;
 
-const LoginPage = ({ }) => {
+const LoginPage = ({ times }) => {
 
    //for login
   const [username, setUsername] = useState("");
@@ -112,11 +112,11 @@ const LoginPage = ({ }) => {
       username: username,
       password: password,
     }).then((response) => {
-      console.log(response);
+      console.log(response.data);
     });
   };
   return (
-  <div className="registrationRoot">
+  <div className="LoginRoot">
   <h1>Login</h1>
   <Form>
 <Form.Group className="mb-3" controlId="formBasicUsername">
