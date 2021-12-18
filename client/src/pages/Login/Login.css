@@ -1,0 +1,21 @@
+.loginRoot {
+    text-align: center;
+    padding-top: 5%;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.loginButton{
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.loginButton button {
+    background-color: #061947 !important;
+    color: white !important;
+    border: none !important;
+    width: 50% !important;
+    height: 3rem !important;
+}
+
