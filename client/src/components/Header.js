@@ -40,11 +40,6 @@ const Header = () => {
                                             <Link to="/register">
                                                 <Nav.Link href="/register">Register</Nav.Link>
                                             </Link>
-                                            <Link to="/calendar">
-                                                <Nav.Link href="/calendar">
-                                                    Calendar
-                                                </Nav.Link>
-                                            </Link>
                                         </Nav>
                                     </Navbar.Collapse>
                             </Navbar>

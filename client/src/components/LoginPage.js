@@ -101,7 +101,7 @@ import "./styling/RegistrationCSS.css"
       
 // export default LoginForm;
 
-const LoginPage = ({ times }) => {
+const RegistrationPage = ({ times }) => {
 
    //for login
   const [username, setUsername] = useState("");
@@ -112,11 +112,11 @@ const LoginPage = ({ times }) => {
       username: username,
       password: password,
     }).then((response) => {
-      console.log(response.data);
+      console.log(response);
     });
   };
   return (
-  <div className="LoginRoot">
+  <div className="registrationRoot">
   <h1>Login</h1>
   <Form>
 <Form.Group className="mb-3" controlId="formBasicUsername">
@@ -145,4 +145,4 @@ const LoginPage = ({ times }) => {
     )
 }
 
-export default LoginPage;
+export default RegistrationPage;

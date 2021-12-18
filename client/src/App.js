@@ -1,3 +1,5 @@
+import StartingHeader from './components/StartingHeader';
+import StaffHeader from './components/StaffHeader';
 import Header from './components/Header';
 import Excursions from './components/Excursions';
 import ExcursionInfo from './components/ExcursionInfo';
@@ -12,6 +14,8 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Axios from "axios";
+//import {accessLevel} from '/LoginPage.js';
+//import {loginStatus} from '/LoginPage.js';
 
 
 const App = () => {
@@ -146,6 +150,14 @@ const App = () => {
     <Router>
       <div className='container-fluid'>
         <Header />
+
+        {/* if(login == "online" && accessLevel == "customer") {
+          <Header />
+        } else if (login == "online" && accessLevel != "customer") {
+          <StaffHeader />
+        } else {
+          <StartingHeader />
+        } */}
 
         <Routes>
           <Route path="/" exact element={<LandingPage />} />

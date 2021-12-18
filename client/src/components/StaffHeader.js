@@ -7,7 +7,7 @@ import "./styling/HeaderCSS.css"
 
 
 
-const Header = () => {
+const StaffHeader = () => {
 
     return (
        
@@ -57,4 +57,4 @@ const Header = () => {
 
 }
 
-export default Header
+export default StaffHeader
