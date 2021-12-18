@@ -1,6 +1,6 @@
 ## Set Up
 
-Download the .sql file in the main directory and create a database for it in your mySQL. Furthermore, in order for our project to be functional on your machine, you must install all the necessary packages. In our project directory, we have a client folder and a server folder. In your IDE, use 2 terminals - one for each folder. In each terminal, cd into each of the folders. In the client folder, install the following packages:
+Download the .sql file in the main directory and create a database for it in your mySQL. In order for our project to be functional on your machine, you must install all the necessary packages. In our project directory, we have a client folder and a server folder. In your IDE, use 2 terminals - one for each folder. In each terminal, cd into each of the folders. In the client folder, install the following packages:
 
 #### npm i @fortawesome/fontawesome-svg-core
 #### npm i @fortawesome/free-brands-svg-icons
